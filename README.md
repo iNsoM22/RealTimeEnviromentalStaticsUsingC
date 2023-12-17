@@ -1,3 +1,4 @@
+<Strong>REAL TIME ENVIRONMENTAL STATICS USING C</Strong>
 This repo will contain all the Future implementations of Our Environmental Analysis Using C language. 
 - The data will be collected from a get request to an API, and certain fields of them will be stored in a FIlE.
 - The data will be shown to the user, as desired.
