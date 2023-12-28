@@ -47,7 +47,7 @@ char *dateUNIXConversion() {
     date[strcspn(date, "\n")] = '\0';
 
     // Checks if the date is dynamic or specific.
-    if(!strcmp(date, "last7days") || !strcmp(date, "last30days")){
+    if(!strcmp(date, "last7days") || !strcmp(date, "last30days") || !strcmp(date, "next7days") || !strcmp(date, "next30days")){
         return date;
     }
 
