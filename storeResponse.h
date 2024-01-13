@@ -1,22 +1,49 @@
-// response_handler.h
+/**
+ * @file storeResponse.h
+ *
+ * @brief Functions for handling HTTP responses and storing data.
+ */
 
-#ifndef RESPONSE_HANDLER_H
-#define RESPONSE_HANDLER_H
+#ifndef STORE_RESPONSE_H
+#define STORE_RESPONSE_H
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-// Define the Response structure
-typedef struct {
-    char *string;
-    size_t size;
+/**
+ * @struct Response
+ * @brief Structure to store HTTP response data.
+ */
+typedef struct
+{
+    char *string; /**< Pointer to the received data. */
+    size_t size;  /**< Size of the data. */
 } Response;
 
-// Declare the write_chunk function
+/**
+ * @brief Write received data chunk to response buffer.
+ *
+ * This function is used as the CURLOPT_WRITEFUNCTION when performing a curl request.
+ * It writes the received data chunk to the response buffer, reallocating memory as needed.
+ *
+ * @param data Pointer to the received data.
+ * @param size Size of each data element.
+ * @param nmemb Number of elements.
+ * @param userdata Pointer to the Response structure.
+ * @return Total size of the data chunk.
+ */
 size_t write_chunk(void *data, size_t size, size_t nmemb, void *userdata);
 
-// Declare the save_json_to_file function
+/**
+ * @brief Save JSON string to a file.
+ *
+ * This function takes a filename and a JSON string, and writes the JSON string to the specified file.
+ *
+ * @param filename Name of the file to save the JSON to.
+ * @param json The JSON string to be saved.
+ * @return 0 on success, -1 on failure.
+ */
 int save_json_to_file(const char *filename, const char *json);
 
-#endif  // RESPONSE_HANDLER_H
+#endif

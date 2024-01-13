@@ -1,80 +1,60 @@
-#define _XOPEN_SOURCE
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
+#include "timeUNIXConversion.h"
 
-#define MAX_INPUT_SIZE 20
-
-
-/**
- * @brief Convert a timestamp to Unix time.
- *
- * This function prompts the user to enter a timestamp in the format "YYYY/MM/DD HH:MM:SS"
- * or specify "last7days" or "last30days". It then converts the timestamp to Unix time.
- * If successful, it returns the Unix time as a string; otherwise, it returns NULL.
- *
- * @return A string representing Unix time or NULL on failure.
- */
-
-
-char *dateUNIXConversion() {
+char *date_unix_conversion(const char *formattedDate)
+{
     struct tm tm;
     time_t t;
 
-    // Allocate memory for date string
-    char *date = (char *)malloc(MAX_INPUT_SIZE * sizeof(char));
-
-    // Checks if the Memory Allocation was successfull or not.
-    if (date == NULL) {
-        fprintf(stderr, "Memory allocation error.\n");
+    // Checks if the User has entered the input or not.
+    if (formattedDate == NULL)
+    {
+        fprintf(stderr, "Error: NULL input.\n");
         return NULL;
     }
 
-    printf("Enter the TimeStamp: ");
-    
-    // Read input using fgets
-    fgets(date, MAX_INPUT_SIZE, stdin);
-
-    // Checks if the User has entered the input or not.
-    if (date == NULL) {
-        fprintf(stderr, "Error reading input.\n");
-        free(date); 
+    // Allocate memory for the string representation of Unix time.
+    char *result = (char *)malloc(20);
+    if (result == NULL)
+    {
+        perror("Memory allocation error");
         return NULL;
+    }
+
+    // Checks if the date is dynamic or specific.
+    if (strcmp(formattedDate, "last7days") == 0 || strcmp(formattedDate, "last30days") == 0 ||
+        strcmp(formattedDate, "next7days") == 0 || strcmp(formattedDate, "next30days") == 0)
+    {
+        strcpy(result, formattedDate);
+        return result;
     }
 
     // Removes the newline character if present.
-    date[strcspn(date, "\n")] = '\0';
-
-    // Checks if the date is dynamic or specific.
-    if(!strcmp(date, "last7days") || !strcmp(date, "last30days") || !strcmp(date, "next7days") || !strcmp(date, "next30days")){
-        return date;
-    }
-
-    // Converts the string-formatted date into time structure.
-    strptime(date, "%Y/%m/%d %H:%M:%S", &tm);
-
-    // Checks if the date is successfully converted into the time structure.
-    if (&tm == NULL) {
-        fprintf(stderr, "Invalid Date and Time Format.\n");
+    char *dateCopy = strdup(formattedDate);
+    if (dateCopy == NULL)
+    {
+        perror("Memory allocation error");
+        free(result);
         return NULL;
     }
 
-    // Converts the time-structured date into seconds representation. 
+    dateCopy[strcspn(dateCopy, "\n")] = '\0';
+
+    // Converts the string-formatted date into a time structure.
+    if (strptime(dateCopy, "%Y/%m/%d %H:%M:%S", &tm) == NULL)
+    {
+        fprintf(stderr, "Error: Invalid Date and Time Format.\n");
+        free(result);
+        free(dateCopy);
+        return NULL;
+    }
+
+    free(dateCopy);
+
+    // Converts the time-structured date into seconds representation.
     t = mktime(&tm);
 
-    // Allocate memory for the string representation of Unix time.
-    char *result = (char *)malloc(20 * sizeof(char));
-    
-    if (result == NULL) {
-        fprintf(stderr, "Memory allocation error.\n");
-        return NULL;
-    }
-
     // Convert Unix time to string
-    sprintf(result, "%ld", (long)t);
-    
-    free(date);
+    snprintf(result, 20, "%ld", (long)t);
 
     return result;
 }
