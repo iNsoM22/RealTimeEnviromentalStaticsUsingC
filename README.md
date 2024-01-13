@@ -9,7 +9,6 @@ This program retrieves weather data, processes it, generates a report, and sends
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Usage](#usage)
-- [Configuration](#configuration)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -35,7 +34,8 @@ This program retrieves weather data, processes it, generates a report, and sends
 
     ```bash
     git clone https://github.com/iNsoM22/RealTimeEnviromentalStaticsUsingC.git 
-    cd RealTimeEnviromentalStaticsUsingC```
+    cd RealTimeEnviromentalStaticsUsingC
+    ```
 
 ### Usage
 
