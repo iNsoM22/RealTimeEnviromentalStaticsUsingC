@@ -40,7 +40,9 @@ This program retrieves weather data, processes it, generates a report, and sends
 ### Usage
 
 - clone and run requirements.sh shell script to install the dependencies.
-- Add credientiels, email, API, etc required in the automation.sh shell script
+- Add credientiels, email, API, etc required in the automation.sh shell script.
+- make the shell scripts executable.
+  -- sudo chmod +x <filename>
 - run automation.sh shell script to compile and run the program.
 
 ### Contributing
