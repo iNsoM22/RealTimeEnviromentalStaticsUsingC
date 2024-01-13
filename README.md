@@ -40,7 +40,19 @@ This program retrieves weather data, processes it, generates a report, and sends
 ### Usage
 
 - clone and run requirements.sh shell script to install the dependencies.
+- Add credientiels, email, API, etc required in the automation.sh shell script
 - run automation.sh shell script to compile and run the program.
+
+### Contributing
+
+Contributions are welcome! If you find a bug or have an enhancement in mind, feel free to open an issue or submit a pull request.
+or Contact me at: s.a.moizkhan988@gmail.com
+
+## License
+
+This project is licensed under the MIT License.
+
+
 
 
 
