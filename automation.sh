@@ -1,17 +1,17 @@
 #!/bin/bash
 
-export LOCATION=""
-export TIMESTAMP=""
-export RAW_FILE_PATH=""
-export PROCESSED_FILE_PATH=""
-export PDF_FILE_PATH=""
+export LOCATION="Karachi"
+export TIMESTAMP="next7days"
+export RAW_FILE_PATH="RawDataFile.json"
+export PROCESSED_FILE_PATH="ProcessedData.json"
+export PDF_FILE_PATH="WeatherReport.pdf"
 export FROM_EMAIL=""
 export FROM_PASSWORD=""
 export TO_EMAIL=""
-export SMTP_SERVER=""
+export SMTP_SERVER="smtp.gmail.com"
 export SMTP_PORT=465
-export WEATHER_API_BASE_ADDRESS=""
-export WEATHER_API_KEY=""
+export WEATHER_API_BASE_ADDRESS="https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"
+export WEATHER_API_KEY="GSF87S3N5CL3FLVMY4264S9RU"
 
 # Compile the weatherForecast program
 gcc weatherForecast.c weatherProcessing.c weatherReport.c timeUNIXConversion.c storeResponse.c logger.c getDataAPI.c alert.c -lcurl -lcjson -lhpdf -o weatherForecast
